@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const pikaday = fs.readFileSync(`${__dirname}/../../node_modules/pikaday/pikaday.js`);
-const pikadayCSS = fs.readFileSync(`${__dirname}/../../node_modules/pikaday/css/pikaday.css`);
+const pikaday = fs.readFileSync(`${__dirname}/../../hosted/pikaday/pikaday.js`);
+const pikadayCSS = fs.readFileSync(`${__dirname}/../../hosted/pikaday/css/pikaday.css`);
 
 const getPikaday = (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/javascript' });
