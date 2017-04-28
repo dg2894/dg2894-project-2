@@ -21,7 +21,7 @@ const router = (app) => {
   app.get('/pikaday', mid.requiresSecure, controllers.Filesystem.getPikaday);
   app.get('/pikaday.css', mid.requiresSecure, controllers.Filesystem.getPikadayCSS);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
-  app.get('*', function (req, res){
+  app.get('*', (req, res) => {
     res.render('notFound', { error: 'The page you are looking for was not found' });
   });
 };

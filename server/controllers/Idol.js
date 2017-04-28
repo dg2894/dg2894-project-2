@@ -46,40 +46,38 @@ const makeIdol = (req, res) => {
   return idolPromise;
 };
 
-const editIdol = (req, res) => {
-  return Idol.IdolModel.findEditable(req.params.idolid, (err, docs) => {
-    if (err) {
-      return res.status(400).json({ error: 'An error occured' });
-    }
+const editIdol = (req, res) => Idol.IdolModel.findEditable(req.params.idolid, (err, docs) => {
+  if (err) {
+    return res.status(400).json({ error: 'An error occured' });
+  }
 
-    console.log(req.csrfToken())
+  console.log(req.csrfToken());
 
-    const updatedIdol = docs;
+  const updatedIdol = docs;
 
-    updatedIdol.name = req.body.name;
-    updatedIdol.birthday = req.body.birthday;
-    updatedIdol.status = req.body.status;
-    updatedIdol.talent = req.body.talent;
-    updatedIdol.height = req.body.height;
-    updatedIdol.notes = req.body.notes;
+  updatedIdol.name = req.body.name;
+  updatedIdol.birthday = req.body.birthday;
+  updatedIdol.status = req.body.status;
+  updatedIdol.talent = req.body.talent;
+  updatedIdol.height = req.body.height;
+  updatedIdol.notes = req.body.notes;
 
-    const savePromise = updatedIdol.save();
+  const savePromise = updatedIdol.save();
 
     // send back the name as a success for now
-    savePromise.then(() => res.json({
-      name: updatedIdol.name,
-      birthday: updatedIdol.birthday,
-      status: updatedIdol.status,
-      talent: updatedIdol.talent,
-      height: updatedIdol.height,
-      notes: updatedIdol.notes
-    }));
+  savePromise.then(() => res.json({
+    name: updatedIdol.name,
+    birthday: updatedIdol.birthday,
+    status: updatedIdol.status,
+    talent: updatedIdol.talent,
+    height: updatedIdol.height,
+    notes: updatedIdol.notes,
+  }));
 
-    savePromise.catch((saveErr) => res.json({ saveErr }));
+  savePromise.catch(saveErr => res.json({ saveErr }));
 
-    return res.json({ foundIdol: docs });
-  });
-};
+  return res.json({ foundIdol: docs });
+});
 
 const getIdols = (request, response) => {
   const req = request;
@@ -93,7 +91,7 @@ const getIdols = (request, response) => {
 
     return res.json({ idols: docs });
   });
-}
+};
 
 const getChosen = (req, res) => {
   Idol.IdolModel.findById(req.params.idolid, (err, docs) => {
@@ -102,9 +100,9 @@ const getChosen = (req, res) => {
       return res.status(400).json({ error: 'An error occured' });
     }
 
-      return res.json({ foundIdol: docs });
+    return res.json({ foundIdol: docs });
   });
-}
+};
 
 const viewIdol = (req, res) => {
   Idol.IdolModel.findById(req.params.idolid, (err, docs) => {
@@ -124,9 +122,9 @@ const viewBy = (req, res) => {
       return res.status(400).json({ error: 'An error occured' });
     }
 
-    return res.render('viewBy', {csrfToken: req.csrfToken(), foundIdols: docs });
+    return res.render('viewBy', { csrfToken: req.csrfToken(), foundIdols: docs });
   });
-}
+};
 
 const getStatusGroup = (req, res) => {
   Idol.IdolModel.findSome(req.session.account._id, req.params.status, (err, docs) => {
@@ -135,9 +133,9 @@ const getStatusGroup = (req, res) => {
       return res.status(400).json({ error: 'An error occured' });
     }
 
-    return res.json({ idols: docs});
+    return res.json({ idols: docs });
   });
-}
+};
 
 module.exports.makerPage = makerPage;
 module.exports.getIdols = getIdols;

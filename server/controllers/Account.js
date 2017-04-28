@@ -39,8 +39,8 @@ const settingsPage = (req, res) => {
 };
 
 const accountInfo = (req, res) => {
-  res.json({ account: req.session.account })
-}
+  res.json({ account: req.session.account });
+};
 
 const updatePassword = (req, res) => {
   const username = `${req.body.username}`;
@@ -57,21 +57,21 @@ const updatePassword = (req, res) => {
     const updatedAccount = account;
 
     return Account.AccountModel.generateHash(req.body.newPass, (salt, hash) => {
-        updatedAccount.password = hash;
-        updatedAccount.salt = salt;
+      updatedAccount.password = hash;
+      updatedAccount.salt = salt;
 
-        const savePromise = updatedAccount.save();
+      const savePromise = updatedAccount.save();
 
-        savePromise.then(() => res.json({
-          password: updatedAccount.password,
-        }));
+      savePromise.then(() => res.json({
+        password: updatedAccount.password,
+      }));
 
-        savePromise.catch((saveErr) => res.json({ saveErr }));
+      savePromise.catch(saveErr => res.json({ saveErr }));
 
-        return res.json({ redirect: '/login' });
+      return res.json({ redirect: '/login' });
     });
   });
-}
+};
 
 
 const signup = (request, response) => {

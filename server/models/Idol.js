@@ -7,7 +7,7 @@ const _ = require('underscore');
 let IdolModel = {};
 
 const convertId = mongoose.Types.ObjectId;
-const setName = (name) => _.escape(name).trim();
+const setName = name => _.escape(name).trim();
 
 const IdolSchema = new mongoose.Schema({
   name: {
@@ -65,7 +65,7 @@ IdolSchema.statics.findById = (idolId, callback) => {
     _id: idolId,
   };
 
-   return IdolModel.find(search).select('_id name birthday status talent height notes').exec(callback);
+  return IdolModel.find(search).select('_id name birthday status talent height notes').exec(callback);
 };
 
 IdolSchema.statics.findEditable = (idolId, callback) => {
@@ -73,7 +73,7 @@ IdolSchema.statics.findEditable = (idolId, callback) => {
     _id: idolId,
   };
 
-   return IdolModel.findOne(search, callback);
+  return IdolModel.findOne(search, callback);
 };
 
 IdolSchema.statics.findBy = (attr, callback) => {
@@ -81,16 +81,16 @@ IdolSchema.statics.findBy = (attr, callback) => {
     status: attr,
   };
 
-   return IdolModel.findOne(search, callback);
+  return IdolModel.findOne(search, callback);
 };
 
 IdolSchema.statics.findSome = (ownerId, status, callback) => {
   const search = {
     owner: convertId(ownerId),
-    status: status,
+    status,
   };
 
-   return IdolModel.find(search).select('_id name age status talent').exec(callback);
+  return IdolModel.find(search).select('_id name age status talent').exec(callback);
 };
 
 IdolModel = mongoose.model('Idol', IdolSchema);
