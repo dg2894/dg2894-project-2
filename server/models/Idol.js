@@ -82,7 +82,6 @@ IdolSchema.statics.findEditable = (idolId, callback) => {
 
 IdolSchema.statics.findBy = (attr, callback) => {
   const search = {
-    owner: convertId(ownerId),
     status: attr,
   };
 
