@@ -2,7 +2,10 @@
 
 var handleError = function handleError(message) {
   $("#errorMessage").text(message);
-  $("#idolMessage").animate({ width: 'toggle' }, 350);
+};
+
+var handleSuccess = function handleSuccess(message) {
+  $("#successMessage").text(message);
 };
 
 var redirect = function redirect(response) {

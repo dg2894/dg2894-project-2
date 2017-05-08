@@ -30,6 +30,7 @@ const renderIdol = function() {
     >
       <h3 className="sectionTitle">Create A New Profile</h3>
       <input id="idolName" type="text" name="name" placeholder="Name" required/>
+      <input id="idolPhoto" type="text" name="photo" placeholder="Profile Photo"/>
       <input id="idolBirthday" type="text" name="birthday" placeholder="Birthday" required/>
       <input id="idolStatus" type="text" name="status" placeholder="Status" required/>
       <input id="idolTalent" type="text" name="talent" placeholder="Talent" required/>
@@ -52,7 +53,11 @@ const renderIdolList = function() {
 
   const idolNodes = this.state.data.map(function(idol) {
     return (
-      <div key={idol._id} className="idol">
+      <div key={idol._id} className="idol"
+        style={{backgroundImage: 'url(' + idol.photo + ')',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'none'}}>
         <div className="idolInfo">
           <h3 className="idolName">{idol.name}</h3>
           <h3 className="idolStatus"><a href={'/viewBy/' + idol.status}>{idol.status}</a></h3>

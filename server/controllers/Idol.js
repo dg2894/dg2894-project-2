@@ -20,6 +20,7 @@ const makeIdol = (req, res) => {
 
   const idolData = {
     name: req.body.name,
+    photo: req.body.photo,
     birthday: req.body.birthday,
     status: req.body.status,
     talent: req.body.talent,
@@ -57,6 +58,7 @@ const editIdol = (req, res) => {
     const updatedIdol = docs;
 
     updatedIdol.name = req.body.name;
+    updatedIdol.photo = req.body.photo;
     updatedIdol.birthday = req.body.birthday;
     updatedIdol.status = req.body.status;
     updatedIdol.talent = req.body.talent;
@@ -68,6 +70,7 @@ const editIdol = (req, res) => {
     // send back the name as a success for now
     savePromise.then(() => res.json({
       name: updatedIdol.name,
+      photo: updatedIdol.photo,
       birthday: updatedIdol.birthday,
       status: updatedIdol.status,
       talent: updatedIdol.talent,

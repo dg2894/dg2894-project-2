@@ -48,6 +48,7 @@ const renderEditForm = function () {
       <div key={idol._id} className="chosenIdol">
         <h3 className="sectionTitle">Edit {idol.name}'s Profile</h3>
         <input id="idolName" type="text" name="name" defaultValue={idol.name} placeholder="Name" required/>
+        <input id="idolPhoto" type="text" name="photo" defaultValue={idol.photo} placeholder="Profile Photo"/>
         <input id="idolBirthday" type="text" name="birthday" defaultValue={idol.birthday} placeholder="Birthday" required/>
         <input id="idolStatus" type="text" name="status" defaultValue={idol.status} placeholder="Status" required/>
         <input id="idolTalent" type="text" name="talent" defaultValue={idol.talent} placeholder="Talent" required/>
@@ -109,9 +110,6 @@ const createPage = function(csrf, renderElement) {
       document.querySelector("#makeIdol")
     );
   }
-
-  console.log(document.querySelector('#idolBirthday'));
-
 };
 
 const setup = function (csrf) {

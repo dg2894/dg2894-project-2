@@ -37,6 +37,7 @@ var renderIdol = function renderIdol() {
       "Create A New Profile"
     ),
     React.createElement("input", { id: "idolName", type: "text", name: "name", placeholder: "Name", required: true }),
+    React.createElement("input", { id: "idolPhoto", type: "text", name: "photo", placeholder: "Profile Photo" }),
     React.createElement("input", { id: "idolBirthday", type: "text", name: "birthday", placeholder: "Birthday", required: true }),
     React.createElement("input", { id: "idolStatus", type: "text", name: "status", placeholder: "Status", required: true }),
     React.createElement("input", { id: "idolTalent", type: "text", name: "talent", placeholder: "Talent", required: true }),
@@ -63,7 +64,11 @@ var renderIdolList = function renderIdolList() {
   var idolNodes = this.state.data.map(function (idol) {
     return React.createElement(
       "div",
-      { key: idol._id, className: "idol" },
+      { key: idol._id, className: "idol",
+        style: { backgroundImage: 'url(' + idol.photo + ')',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'none' } },
       React.createElement(
         "div",
         { className: "idolInfo" },

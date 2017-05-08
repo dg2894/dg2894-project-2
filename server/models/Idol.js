@@ -22,6 +22,10 @@ const IdolSchema = new mongoose.Schema({
     required: true,
   },
 
+  photo: {
+    type: String,
+  },
+
   status: {
     type: String,
     required: true,
@@ -57,7 +61,7 @@ IdolSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return IdolModel.find(search).select('name birthday status talent').exec(callback);
+  return IdolModel.find(search).select('name photo birthday status talent').exec(callback);
 };
 
 IdolSchema.statics.findById = (idolId, callback) => {
@@ -65,7 +69,7 @@ IdolSchema.statics.findById = (idolId, callback) => {
     _id: idolId,
   };
 
-   return IdolModel.find(search).select('_id name birthday status talent height notes').exec(callback);
+   return IdolModel.find(search).select('_id name photo birthday status talent height notes').exec(callback);
 };
 
 IdolSchema.statics.findEditable = (idolId, callback) => {
@@ -78,6 +82,7 @@ IdolSchema.statics.findEditable = (idolId, callback) => {
 
 IdolSchema.statics.findBy = (attr, callback) => {
   const search = {
+    owner: convertId(ownerId),
     status: attr,
   };
 
@@ -90,7 +95,7 @@ IdolSchema.statics.findSome = (ownerId, status, callback) => {
     status: status,
   };
 
-   return IdolModel.find(search).select('_id name age status talent').exec(callback);
+   return IdolModel.find(search).select('_id photo name age status talent').exec(callback);
 };
 
 IdolModel = mongoose.model('Idol', IdolSchema);

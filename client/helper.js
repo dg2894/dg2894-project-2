@@ -1,6 +1,9 @@
 const handleError = (message) => {
   $("#errorMessage").text(message);
-  $("#idolMessage").animate({width:'toggle'}, 350);
+};
+
+const handleSuccess = (message) => {
+  $("#successMessage").text(message);
 };
 
 const redirect = (response) => {

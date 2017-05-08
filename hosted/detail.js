@@ -126,6 +126,7 @@ var renderEditForm = function renderEditForm() {
         "'s Profile"
       ),
       React.createElement("input", { id: "idolName", type: "text", name: "name", defaultValue: idol.name, placeholder: "Name", required: true }),
+      React.createElement("input", { id: "idolPhoto", type: "text", name: "photo", defaultValue: idol.photo, placeholder: "Profile Photo" }),
       React.createElement("input", { id: "idolBirthday", type: "text", name: "birthday", defaultValue: idol.birthday, placeholder: "Birthday", required: true }),
       React.createElement("input", { id: "idolStatus", type: "text", name: "status", defaultValue: idol.status, placeholder: "Status", required: true }),
       React.createElement("input", { id: "idolTalent", type: "text", name: "talent", defaultValue: idol.talent, placeholder: "Talent", required: true }),
@@ -182,8 +183,6 @@ var createPage = function createPage(csrf, renderElement) {
   } else {
     idolRenderer = ReactDOM.render(React.createElement(ChosenIdolClass, { csrf: csrf }), document.querySelector("#makeIdol"));
   }
-
-  console.log(document.querySelector('#idolBirthday'));
 };
 
 var setup = function setup(csrf) {

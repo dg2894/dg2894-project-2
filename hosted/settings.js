@@ -16,7 +16,8 @@ var handleEdit = function handleEdit(e) {
   }
 
   sendAjax('POST', $("#accountForm").attr("action"), $("#accountForm").serialize(), function () {
-    window.location.reload();
+    handleError("");
+    handleSuccess("Password has been changed");
   });
 
   return false;
