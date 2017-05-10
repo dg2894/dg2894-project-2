@@ -6,7 +6,7 @@ const _ = require('underscore');
 
 let ApplicantModel = {};
 
-const convertId = mongoose.Types.ObjectId;
+//const convertId = mongoose.Types.ObjectId;
 const setName = (name) => _.escape(name).trim();
 
 const ApplicantSchema = new mongoose.Schema({
