@@ -7,22 +7,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.min.js"></script>
+  <script src="/pikaday"></script>
   <link rel="shortcut icon" href="/assets/img/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="/assets/main.css"/>
+  <link rel="stylesheet" type="text/css" href="/pikaday.css">
 </head>
-<body id="account-body">
-  <div id="account-area">
-    <h3 id="page-title">Welcome</h3>
-    <p id="app-desc">Whose dreams are you managing today?</p>
-    <section id="dynamiContent"></section>
-    <nav>
-      <div class="login hide" id="login-text">Already have an account?  <a id="loginButton" href="/login">Login</a></div>
-      <div class="signup" id="signup-text">Don't have an account?  <a id="signupButton" href="/signup">Sign up</a></div>
-      <div class="apply" id="apply-text">Looking for an agency?  <a id="applyButtoj" href="/apply">Apply</a></div>
-      <span id="errorMessage"></span>
+<body>
+    <nav id="top-nav">
+      <div class="navlink"><a href="/settingsPage">Change Password</a></div>
+      <div class="navlink"><a href="/logout">Log out</a></div>
     </nav>
-  </div>
-  <script src="/assets/client.js"></script>
+    <div class="form-space">
+      <section id="makeApplicant"></section>
+    </div>
+    <div id="idol-gallery">
+      <h3 class="sectionTitle">All Profilessss</h3>
+      <section id="applicants"></section>
+    </div>
+  <script src="/assets/apply.js"></script>
   <script src="/assets/helper.js"></script>
 </body>
 </html>

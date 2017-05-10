@@ -8,6 +8,9 @@ const router = (app) => {
   app.get('/getChosen/:idolid', mid.requiresSecure, controllers.Idol.getChosen);
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
+  app.get('/apply', mid.requiresSecure, mid.requiresLogout, controllers.Applicant.applyPage);
+  app.get('/getApplicants', mid.requiresSecure, mid.requiresLogout, controllers.Applicant.getApplicants);
+  app.post('/createApplicant', mid.requiresSecure, mid.requiresLogout, controllers.Applicant.makeApplicant);
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
   app.get('/settingsPage', mid.requiresLogin, controllers.Account.settingsPage);
