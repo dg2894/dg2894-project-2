@@ -21,8 +21,24 @@ const handleEdit = function (e) {
   return false;
 };
 
+
+const handleFavorite = function (e) {
+  e.preventDefault();
+
+  let idolFave = document.querySelector('.idolFavorite').checked;
+
+  const requestUrl = '/favorite/' + idolId + idolFave;
+
+  sendAjax('POST', requestUrl, $("#chosenIdolFavorite").serialize(), function(idol) {
+    window.location.reload();
+  });
+
+  return false;
+};
+
 const renderChosenIdol = function() {
   const idolNode = this.state.data.map(function(idol) {
+
     return (
       <div key={idol._id} className="idolInfo">
         <h3 className="idolName"><span className="idol-label">Name</span>: {idol.name} </h3>
@@ -35,8 +51,29 @@ const renderChosenIdol = function() {
     );
   });
 
+  const favoriteNode = this.state.data.map(function(idol) {
+    if (idol.favorite) {
+      return (
+        <input key={idol._id} className="idolFavorite" type="checkbox" name="favorite" defaultChecked="checked"/>
+      );
+    } else {
+      return (
+        <input key={idol._id} className="idolFavorite" type="checkbox" name="favorite"/>
+      );
+    }
+  });
+
   return (
     <div className="chosenIdol">
+      <form id="chosenIdolFavorite"
+        onChange={this.handleFavorite}
+        name="chosenIdolFavorite"
+        method="POST"
+      >
+        <input type="hidden" name="_csrf" value={this.props.csrf}/>
+        {favoriteNode}
+      </form>
+
       {idolNode}
     </div>
   );
@@ -82,6 +119,7 @@ const createPage = function(csrf, renderElement) {
 
   ChosenIdolClass = React.createClass({
     handleSubmit: handleEdit,
+    handleFavorite: handleFavorite,
     loadChosenFromServer: function() {
       sendAjax('GET', requestUrl, null, function(data) {
         this.setState({data:data.foundIdol});
@@ -123,29 +161,6 @@ const setup = function (csrf) {
 
   createPage(csrf, renderChosenIdol);
 }
-
-const getToken = () => {
-  sendAjax('GET', '/getToken', null, (result) => {
-    setup(result.csrfToken);
-  });
-}
-
-const aniUp = () => {
-  var previousScroll = 0;
-
-  $(window).scroll(function(){
-    var currentScroll = $(this).scrollTop();
-
-    if (currentScroll > previousScroll) {
-      $('#top-nav').addClass('hideNav');
-      $('.navlink').removeClass('navlink-trans');
-    } else {
-      $('#top-nav').removeClass('hideNav');
-      $('.navlink').addClass('navlink-trans');
-    }
-    previousScroll = currentScroll;
-  });
-};
 
 $(document).ready(function() {
   getToken();

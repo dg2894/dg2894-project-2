@@ -84,6 +84,45 @@ const editIdol = (req, res) => {
   });
 };
 
+const toggleFavorite = (req, res) => {
+  return Idol.IdolModel.findEditable(req.params.idolid, (err, docs) => {
+    if (err) {
+      return res.status(400).json({ error: 'An error occured' });
+    }
+
+    const updatedIdol = docs;
+
+    updatedIdol.favorite = req.params.idolfave;
+
+    const savePromise = updatedIdol.save();
+
+    // send back the name as a success for now
+    savePromise.then(() => res.json({
+      favorite: updatedIdol.favorite,
+    }));
+
+    savePromise.catch((saveErr) => res.json({ saveErr }));
+
+    return res.json({ foundIdol: docs });
+  });
+};
+
+const favoritesPage = (req, res) => {
+  return res.render('favorites', { csrfToken: req.csrfToken()});
+};
+
+
+const getFavorites = (req, res) => {
+  Idol.IdolModel.findFavorites(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occured' });
+    }
+
+    return res.json({ idols: docs});
+  });
+}
+
 const getIdols = (request, response) => {
   const req = request;
   const res = response;
@@ -148,5 +187,8 @@ module.exports.make = makeIdol;
 module.exports.viewIdol = viewIdol;
 module.exports.editIdol = editIdol;
 module.exports.getChosen = getChosen;
+module.exports.toggleFavorite = toggleFavorite;
+module.exports.getFavorites = getFavorites;
+module.exports.favoritesPage = favoritesPage;
 module.exports.viewBy = viewBy;
 module.exports.getStatusGroup = getStatusGroup;

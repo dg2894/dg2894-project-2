@@ -4,12 +4,16 @@ const mid = require('./middleware');
 const router = (app) => {
   app.get('/getToken', mid.requiresSecure, controllers.Account.getToken);
   app.get('/getIdols', mid.requiresSecure, controllers.Idol.getIdols);
+  app.post('/favorite/:idolid/:idolfave', mid.requiresLogin, mid.requiresSecure, controllers.Idol.toggleFavorite);
   app.get('/view/:idolid', mid.requiresSecure, controllers.Idol.viewIdol);
   app.get('/getChosen/:idolid', mid.requiresSecure, controllers.Idol.getChosen);
+  app.get('/applicants', mid.requiresSecure, mid.requiresLogin, controllers.Account.applicantsPage);
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
   app.get('/apply', mid.requiresSecure, mid.requiresLogout, controllers.Applicant.applyPage);
-  app.get('/getApplicants', mid.requiresSecure, mid.requiresLogout, controllers.Applicant.getApplicants);
+  app.get('/getApplicants', mid.requiresSecure, controllers.Applicant.getApplicants);
+  app.get('/favorites', mid.requiresSecure, mid.requiresLogin, controllers.Idol.favoritesPage);
+  app.get('/getFavorites', mid.requiresSecure, mid.requiresLogin, controllers.Idol.getFavorites);
   app.post('/createApplicant', mid.requiresSecure, mid.requiresLogout, controllers.Applicant.makeApplicant);
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);

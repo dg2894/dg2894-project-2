@@ -73,12 +73,6 @@ var setup = function setup(csrf) {
   formRenderer = ReactDOM.render(React.createElement(EditFormClass, { csrf: csrf }), document.querySelector("#passwordForm"));
 };
 
-var getToken = function getToken() {
-  sendAjax('GET', '/getToken', null, function (result) {
-    setup(result.csrfToken);
-  });
-};
-
 $(document).ready(function () {
   getToken();
 });

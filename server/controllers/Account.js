@@ -38,6 +38,10 @@ const settingsPage = (req, res) => {
   res.render('settings', { csrfToken: req.csrfToken(), account: req.session.account });
 };
 
+const applicantsPage = (req, res) => {
+  res.render('applicants', { csrfToken: req.csrfToken() });
+};
+
 const accountInfo = (req, res) => {
   res.json({ account: req.session.account })
 }
@@ -137,3 +141,4 @@ module.exports.getToken = getToken;
 module.exports.settingsPage = settingsPage;
 module.exports.updatePassword = updatePassword;
 module.exports.accountInfo = accountInfo;
+module.exports.applicantsPage = applicantsPage;

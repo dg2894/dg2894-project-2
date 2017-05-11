@@ -44,6 +44,11 @@ const IdolSchema = new mongoose.Schema({
     type: String,
   },
 
+  favorite: {
+    type: Boolean,
+    default: false,
+  },
+
   owner: {
     type: mongoose.Schema.ObjectId,
     required: true,
@@ -64,12 +69,22 @@ IdolSchema.statics.findByOwner = (ownerId, callback) => {
   return IdolModel.find(search).select('name photo birthday status talent').exec(callback);
 };
 
+IdolSchema.statics.findFavorites = (ownerId, callback) => {
+  const search = {
+    owner: convertId(ownerId),
+    favorite: true,
+  };
+
+  return IdolModel.find(search).select('name photo birthday status talent').exec(callback);
+};
+
+
 IdolSchema.statics.findById = (idolId, callback) => {
   const search = {
     _id: idolId,
   };
 
-   return IdolModel.find(search).select('_id name photo birthday status talent height notes').exec(callback);
+   return IdolModel.find(search).select('_id name photo birthday status talent height notes favorite').exec(callback);
 };
 
 IdolSchema.statics.findEditable = (idolId, callback) => {

@@ -23,8 +23,23 @@ var handleEdit = function handleEdit(e) {
   return false;
 };
 
+var handleFavorite = function handleFavorite(e) {
+  e.preventDefault();
+
+  var idolFave = document.querySelector('.idolFavorite').checked;
+
+  var requestUrl = '/favorite/' + idolId + idolFave;
+
+  sendAjax('POST', requestUrl, $("#chosenIdolFavorite").serialize(), function (idol) {
+    window.location.reload();
+  });
+
+  return false;
+};
+
 var renderChosenIdol = function renderChosenIdol() {
   var idolNode = this.state.data.map(function (idol) {
+
     return React.createElement(
       "div",
       { key: idol._id, className: "idolInfo" },
@@ -106,9 +121,27 @@ var renderChosenIdol = function renderChosenIdol() {
     );
   });
 
+  var favoriteNode = this.state.data.map(function (idol) {
+    if (idol.favorite) {
+      return React.createElement("input", { key: idol._id, className: "idolFavorite", type: "checkbox", name: "favorite", defaultChecked: "checked" });
+    } else {
+      return React.createElement("input", { key: idol._id, className: "idolFavorite", type: "checkbox", name: "favorite" });
+    }
+  });
+
   return React.createElement(
     "div",
     { className: "chosenIdol" },
+    React.createElement(
+      "form",
+      { id: "chosenIdolFavorite",
+        onChange: this.handleFavorite,
+        name: "chosenIdolFavorite",
+        method: "POST"
+      },
+      React.createElement("input", { type: "hidden", name: "_csrf", value: this.props.csrf }),
+      favoriteNode
+    ),
     idolNode
   );
 };
@@ -161,6 +194,7 @@ var createPage = function createPage(csrf, renderElement) {
     displayName: "ChosenIdolClass",
 
     handleSubmit: handleEdit,
+    handleFavorite: handleFavorite,
     loadChosenFromServer: function loadChosenFromServer() {
       sendAjax('GET', requestUrl, null, function (data) {
         this.setState({ data: data.foundIdol });
@@ -195,29 +229,6 @@ var setup = function setup(csrf) {
   });
 
   createPage(csrf, renderChosenIdol);
-};
-
-var getToken = function getToken() {
-  sendAjax('GET', '/getToken', null, function (result) {
-    setup(result.csrfToken);
-  });
-};
-
-var aniUp = function aniUp() {
-  var previousScroll = 0;
-
-  $(window).scroll(function () {
-    var currentScroll = $(this).scrollTop();
-
-    if (currentScroll > previousScroll) {
-      $('#top-nav').addClass('hideNav');
-      $('.navlink').removeClass('navlink-trans');
-    } else {
-      $('#top-nav').removeClass('hideNav');
-      $('.navlink').addClass('navlink-trans');
-    }
-    previousScroll = currentScroll;
-  });
 };
 
 $(document).ready(function () {

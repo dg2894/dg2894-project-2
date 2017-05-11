@@ -4,8 +4,7 @@ let IdolFormClass; //Idol Form React UI class
 let IdolListClass; //Idol List React UI class
 
 const setup = function(csrf) {
-  const idolStatus = document.querySelector('#chosenStatus').value;
-  const requestUrl = '/getAll/' + idolStatus;
+  const requestUrl = '/getFavorites';
 
   IdolListClass = React.createClass({
     loadIdolsFromServer: function() {

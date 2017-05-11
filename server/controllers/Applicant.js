@@ -29,7 +29,6 @@ const makeApplicant = (req, res) => {
     height: req.body.height,
     audition: req.body.audition,
     status: 'applicant',
-    //owner: req.session.account._id,
   };
 
   const newApplicant = new Applicant.ApplicantModel(applicantData);
@@ -50,42 +49,6 @@ const makeApplicant = (req, res) => {
   return applicantPromise;
 };
 
-const editApplicant = (req, res) => {
-  return Applicant.ApplicantModel.findEditable(req.params.applicantid, (err, docs) => {
-    if (err) {
-      return res.status(400).json({ error: 'An error occured' });
-    }
-
-    //console.log(req.csrfToken())
-
-    const updatedApplicant = docs;
-
-    updatedApplicant.name = req.body.name;
-    updatedApplicant.birthday = req.body.birthday;
-    updatedApplicant.photo = req.body.photo;
-    updatedApplicant.dream = req.body.dream;
-    updatedApplicant.height = req.body.height;
-    updatedApplicant.audition = req.body.audition;
-
-    const savePromise = updatedApplicant.save();
-
-    // send back the name as a success for now
-    savePromise.then(() => res.json({
-      name: updatedApplicant.name,
-      birthday: updatedApplicant.birthday,
-      photo: updatedApplicant.photo,
-      dream: updatedApplicant.dream,
-      height: updatedApplicant.height,
-      audition: updatedApplicant.audition,
-      status: 'applicant'
-    }));
-
-    savePromise.catch((saveErr) => res.json({ saveErr }));
-
-    return res.json({ foundApplicant: docs });
-  });
-};
-
 const getApplicants = (request, response) => {
   const req = request;
   const res = response;
@@ -93,24 +56,12 @@ const getApplicants = (request, response) => {
   return Applicant.ApplicantModel.getAll('applicant', (err, docs) => {
     if (err) {
       console.log(err);
-      console.log('i hate myself 2');
       return res.status(400).json({ error: 'An error occured' });
     }
 
     return res.json({ applicants: docs });
   });
 }
-
-// const viewApplicant = (req, res) => {
-//   Idol.IdolModel.findById(req.params.idolid, (err, docs) => {
-//     if (err) {
-//       console.log(err);
-//       return res.status(400).json({ error: 'An error occured' });
-//     }
-
-//     return res.render('detail', { csrfToken: req.csrfToken(), foundIdol: docs });
-//   });
-// };
 
 module.exports.getApplicants = getApplicants;
 module.exports.editApplicant = editApplicant;
