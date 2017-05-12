@@ -55,7 +55,7 @@ var renderIdolList = function renderIdolList() {
   var idolNodes = this.state.data.map(function (idol) {
     return React.createElement(
       'div',
-      { key: idol._id, className: 'idol',
+      { key: idol._id, className: 'idol homepage-idol',
         style: { backgroundImage: 'url(' + idol.photo + ')',
           backgroundPosition: 'center',
           backgroundSize: 'cover',

@@ -48,7 +48,7 @@ const renderIdolList = function() {
 
   const idolNodes = this.state.data.map(function(idol) {
     return (
-      <div key={idol._id} className="idol"
+      <div key={idol._id} className="idol homepage-idol"
         style={{backgroundImage: 'url(' + idol.photo + ')',
         backgroundPosition: 'center',
         backgroundSize: 'cover',

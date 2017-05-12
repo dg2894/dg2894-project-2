@@ -164,6 +164,14 @@ input[type="submit"] {
     }
 }
 
+.homepage-idol {
+    filter: grayscale(100%);
+
+    &:hover {
+        filter: grayscale(0%);
+    }
+}
+
 .idolInfo {
     color: #ccc;
     text-align: center;

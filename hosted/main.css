@@ -123,6 +123,11 @@ input[type="submit"] {
     align-items: center;
     justify-content: center; }
 
+.homepage-idol {
+  filter: grayscale(100%); }
+  .homepage-idol:hover {
+    filter: grayscale(0%); }
+
 .idolInfo {
   color: #ccc;
   text-align: center; }
