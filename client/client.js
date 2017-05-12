@@ -64,7 +64,7 @@ const renderSignup = function() {
       <input id="fake-name" type="String" name="credit-card-name" value="Cody Van De Mark" disabled/>
       <input id="fake-credit-card" type="number" name="credit-card" value="1234567889012345" disabled/>
       <input id="fake-cvc" type="number" name="credit-card-cvc" value="001" disabled/>
-      <input id="fake-address" type="string" name="credit-card-address" value="4 Lomb Drive, Rochester, NY, 14623" disabled/>
+      <input id="fake-address" type="string" name="credit-card-address" value="Golisano Hall (GOL)-2570" disabled/>
       <input type="hidden" name="_csrf" value={this.props.csrf} />
       <input id="loginButton" className="formSubmit" type="submit" value="Sign up" />
     </form>
