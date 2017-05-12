@@ -15,6 +15,9 @@
   backface-visibility: hidden;
   cursor: default; }
 
+body {
+  background-color: #efeff4; }
+
 a {
   color: #96a1a9;
   text-decoration: none;
@@ -33,20 +36,26 @@ input[type="submit"] {
   color: #000; }
 
 #errorMessage {
-  color: #ca7976;
-  display: block;
-  margin-top: 20px;
+  position: absolute;
+  background-color: rgba(216, 18, 24, 0.5);
+  color: #fff;
+  top: -60;
+  padding: 20px;
   font-size: 12px;
-  text-align: center;
-  width: 100%; }
+  box-shadow: 0px 3px 3px #000;
+  animation: moveDown;
+  animation-duration: 4s; }
 
 #successMessage {
-  color: #bcd485;
-  display: block;
-  margin-top: 20px;
+  position: absolute;
+  background-color: rgba(0, 105, 58, 0.5);
+  color: #fff;
+  top: -60;
+  padding: 20px;
   font-size: 12px;
-  text-align: center;
-  width: 100%; }
+  box-shadow: 0px 3px 3px #000;
+  animation: moveDown;
+  animation-duration: 4s; }
 
 /* IDOL FORM */
 .form-space {
@@ -59,7 +68,7 @@ input[type="submit"] {
 #makeIdol form {
   width: 60%;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.9);
   padding: 50px; }
 
 #makeIdol input, #makeIdol textarea {
@@ -105,13 +114,32 @@ input[type="submit"] {
   height: 300px;
   width: calc(100% * (1/5));
   background-color: rgba(0, 0, 0, 0.8); }
-  .idol .idolInfo {
-    color: #fff;
-    text-align: center; }
-    .idol .idolInfo a {
-      color: #ccc; }
-    .idol .idolInfo:hover {
-      transform: scale(1.2); }
+  .idol .idolInfoContainer {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+
+.idolInfo {
+  color: #ccc;
+  text-align: center; }
+  .idolInfo .idolName {
+    font-size: 24px;
+    color: #fff; }
+  .idolInfo .idolStatusHome {
+    font-size: 14px; }
+  .idolInfo .viewIdolLink {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    color: #ccc;
+    font-size: 12px;
+    text-transform: uppercase; }
+    .idolInfo .viewIdolLink:hover {
+      transform: scale(1.1);
+      cursor: pointer; }
 
 /* VIEW BY STATUS */
 #chosenStatus {
@@ -136,12 +164,60 @@ input[type="submit"] {
       margin-bottom: 20px; }
 
 /* VIEW IDOL */
-.idolInfo {
-  color: #000; }
-  .idolInfo .idol-label {
+.profile-page {
+  background-color: #efeff4; }
+  .profile-page .inner-container {
+    background-color: transparent; }
+
+.idolInfoDetail {
+  color: #000;
+  font-weight: 300;
+  box-shadow: 0px 1px 20px #ccc;
+  background-color: #fff; }
+  .idolInfoDetail .idol-label {
     font-weight: 600; }
-  .idolInfo h3 {
+  .idolInfoDetail h3 {
     font-weight: 300; }
+
+.idolNameDetail {
+  color: #000;
+  text-align: center;
+  font-size: 34px;
+  margin-top: 20px;
+  text-align: center;
+  text-transform: uppercase; }
+
+.idolBirthday, .idolHeight {
+  font-size: 12px;
+  color: #000;
+  text-align: center;
+  text-transform: uppercase; }
+
+.status-talent {
+  display: flex;
+  margin-top: 20px; }
+  .status-talent .idol-label {
+    text-transform: uppercase;
+    font-size: 16px; }
+
+.idolStatus, .idolTalent {
+  flex: 1;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 30px; }
+
+.idolStatus {
+  border-right: 1px solid #ccc; }
+
+.idolNotes {
+  padding: 30px;
+  font-size: 14px;
+  text-align: justify; }
+
+.idolPhoto {
+  width: 600px;
+  height: 300px; }
 
 .editButton {
   padding: 15px;
@@ -154,12 +230,87 @@ input[type="submit"] {
   .editButton:hover {
     color: #ccc; }
 
+#favoriteForm form {
+  width: 30px;
+  padding: 20px 50px;
+  background-color: transparent; }
+  #favoriteForm form .idolFavorite {
+    background-color: transparent;
+    border: none;
+    width: auto; }
+  #favoriteForm form .idolFavorite:focus {
+    cursor: pointer;
+    outline: none; }
+  #favoriteForm form .idolFavorite:hover {
+    transform: scale(1.1); }
+  #favoriteForm form .fave {
+    width: 30px;
+    height: auto; }
+
+.down-gallery {
+  margin-top: 65px; }
+
+/* APPLICANTS */
+.applicantList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+.applicant {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% * (1/2) - 40px);
+  margin: 20px;
+  background-color: rgba(0, 0, 0, 0.8); }
+  .applicant .applicantInfoContainer {
+    background-color: #fff;
+    box-shadow: 0px 1px 20px #ccc;
+    display: flex;
+    flex-direction: column; }
+
+.applicantInfo {
+  margin-top: 20px; }
+  .applicantInfo .applicantName {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 24px; }
+  .applicantInfo .applicantBirthday, .applicantInfo .applicantHeight {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #ccc;
+    font-weight: 300;
+    text-align: center; }
+  .applicantInfo .dream-audition {
+    display: flex;
+    margin-top: 20px; }
+    .applicantInfo .dream-audition .a-label {
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: 700; }
+
+.applicantDream, .applicantAudition {
+  flex: 1;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 30px;
+  font-weight: 300;
+  font-size: 14px; }
+
+.applicantDream {
+  border-right: 1px solid #ccc; }
+
+.applicantPhoto {
+  height: 200px;
+  width: 100%; }
+
 /* LOGIN/SETTINGS/NOTFOUND PAGE */
 #account-body, #not-found-body {
   background-image: url(./img/login-bg.jpg);
   background-size: cover;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100%; }
   #account-body nav, #not-found-body nav {
@@ -187,11 +338,11 @@ input[type="submit"] {
   #account-area input {
     padding: 20px 10px; }
 
-#login-text, #signup-text {
+#login-text, #signup-text, #apply-text {
   font-size: 12px;
   color: #fff;
   letter-spacing: 0.01em;
-  margin-top: 30px; }
+  margin-top: 20px; }
 
 .navlink {
   display: inline-block;
@@ -262,16 +413,17 @@ textarea {
   align-items: center;
   justify-content: flex-end;
   position: fixed;
-  width: auto;
-  height: 75px;
+  width: 100%;
+  height: 65px;
   padding: 20px;
   right: 0;
-  z-index: 999; }
+  top: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.8); }
   #top-nav .navlink {
     text-align: right;
     margin: 20px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.9); }
+    padding: 10px; }
     #top-nav .navlink a {
       color: #fff; }
       #top-nav .navlink a:hover {
@@ -284,3 +436,20 @@ textarea {
 
 .hide {
   display: none; }
+
+::-webkit-scrollbar {
+  display: none; }
+
+@keyframes moveDown {
+  0% {
+    top: -60;
+    opacity: 0; }
+  15% {
+    top: 20;
+    opacity: 1; }
+  85% {
+    top: 20;
+    opacity: 1; }
+  100% {
+    top: -60;
+    opacity: 0; } }

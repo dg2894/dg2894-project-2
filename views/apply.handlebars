@@ -12,15 +12,17 @@
   <link rel="stylesheet" type="text/css" href="/assets/main.css"/>
   <link rel="stylesheet" type="text/css" href="/pikaday.css">
 </head>
-<body>
-  <nav id="top-nav">
-    <div class="navlink"><a href="/">Log In</a></div>
-  </nav>
-  <div class="form-space">
+<body id="account-body" class="message-body">
+  <div id="account-area">
+    <h3 id="page-title">Apply Here</h3>
+    <p id="app-desc">Make Your Dreams Come True</p>
     <section id="makeApplicant"></section>
+    <nav>
+      <div class="login" id="login-text">Are you an existing user?  <a id="loginButton" href="/login">Login</a></div>
+    </nav>
   </div>
-  <span id="successMessage"></span>
-  <span id="errorMessage"></span>
+
+
   <script src="/assets/apply.js"></script>
   <script src="/assets/helper.js"></script>
 </body>

@@ -27,6 +27,9 @@ const router = (app) => {
   app.post('/updatePassword', mid.requiresSecure, mid.requiresLogin, controllers.Account.updatePassword);
   app.get('/pikaday', mid.requiresSecure, controllers.Filesystem.getPikaday);
   app.get('/pikaday.css', mid.requiresSecure, controllers.Filesystem.getPikadayCSS);
+  app.get('/favorite.png', mid.requiresSecure, controllers.Filesystem.getFavoriteIcon);
+  app.get('/unfavorite.png', mid.requiresSecure, controllers.Filesystem.getUnfavoriteIcon);
+  app.get('/resume.png', mid.requiresSecure, controllers.Filesystem.getResume)
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.get('*', function (req, res){
     res.render('notFound', { error: 'The page you are looking for was not found' });

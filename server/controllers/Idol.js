@@ -25,9 +25,12 @@ const makeIdol = (req, res) => {
     status: req.body.status,
     talent: req.body.talent,
     height: req.body.height,
-    notes: req.body.notes,
     owner: req.session.account._id,
   };
+
+  if (req.body.notes) {
+    idolData.notes = req.body.notes;
+  }
 
   const newIdol = new Idol.IdolModel(idolData);
 

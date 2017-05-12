@@ -1,11 +1,15 @@
-"use strict";
+'use strict';
 
 var handleError = function handleError(message) {
-  $("#errorMessage").text(message);
+  $('#errorMessage').remove();
+  $('.message-body').append("<span id='errorMessage'></span>");
+  $('#errorMessage').text(message);
 };
 
 var handleSuccess = function handleSuccess(message) {
-  $("#successMessage").text(message);
+  $('#successMessage').remove();
+  $('.message-body').append("<span id='successMessage'></span>");
+  $('#successMessage').text(message);
 };
 
 var redirect = function redirect(response) {
@@ -38,53 +42,61 @@ var getToken = function getToken() {
 var renderIdolList = function renderIdolList() {
   if (this.state.data.length === 0) {
     return React.createElement(
-      "div",
-      { className: "idolList" },
+      'div',
+      { className: 'idolList' },
       React.createElement(
-        "h3",
-        { className: "emptyIdol" },
-        "No profiles yet"
+        'h3',
+        { className: 'emptyIdol' },
+        'No profiles yet'
       )
     );
   }
 
   var idolNodes = this.state.data.map(function (idol) {
     return React.createElement(
-      "div",
-      { key: idol._id, className: "idol",
+      'div',
+      { key: idol._id, className: 'idol',
         style: { backgroundImage: 'url(' + idol.photo + ')',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'none' } },
       React.createElement(
-        "div",
-        { className: "idolInfo" },
+        'div',
+        { className: 'idolInfoContainer' },
         React.createElement(
-          "h3",
-          { className: "idolName" },
-          idol.name
-        ),
-        React.createElement(
-          "h3",
-          { className: "idolStatus" },
+          'div',
+          { className: 'idolInfo' },
           React.createElement(
-            "a",
-            { href: '/viewBy/' + idol.status },
-            idol.status
+            'h3',
+            { className: 'idolName' },
+            idol.name
+          ),
+          React.createElement(
+            'h3',
+            { className: 'idolStatusHome' },
+            React.createElement(
+              'a',
+              { href: '/viewBy/' + idol.status },
+              idol.status
+            )
+          ),
+          React.createElement(
+            'a',
+            { href: '/view/' + idol._id },
+            React.createElement(
+              'div',
+              { className: 'viewIdolLink' },
+              'View Profile'
+            )
           )
-        ),
-        React.createElement(
-          "a",
-          { href: '/view/' + idol._id },
-          "View Profile"
         )
       )
     );
   });
 
   return React.createElement(
-    "div",
-    { className: "idolList" },
+    'div',
+    { className: 'idolList' },
     idolNodes
   );
 };

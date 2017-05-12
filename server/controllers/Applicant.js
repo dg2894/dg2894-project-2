@@ -17,19 +17,22 @@ const applyPage = (request, response) => {
 }
 
 const makeApplicant = (req, res) => {
-  if (!req.body.name || !req.body.birthday || !req.body.photo || !req.body.dream) {
-    return res.status(400).json({ error: 'Name, birthday, photo, and dream are required' });
+  if (!req.body.name || !req.body.birthday || !req.body.dream || !req.body.audition) {
+    return res.status(400).json({ error: 'Name, birthday, dream, and audition are required' });
   }
 
   const applicantData = {
     name: req.body.name,
     birthday: req.body.birthday,
-    photo: req.body.photo,
     dream: req.body.dream,
     height: req.body.height,
     audition: req.body.audition,
     status: 'applicant',
   };
+
+  if (req.body.photo) {
+    applicantData.photo = req.body.photo;
+  }
 
   const newApplicant = new Applicant.ApplicantModel(applicantData);
 
@@ -64,6 +67,5 @@ const getApplicants = (request, response) => {
 }
 
 module.exports.getApplicants = getApplicants;
-module.exports.editApplicant = editApplicant;
 module.exports.makeApplicant = makeApplicant;
 module.exports.applyPage = applyPage;

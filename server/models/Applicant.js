@@ -24,7 +24,7 @@ const ApplicantSchema = new mongoose.Schema({
 
   photo: {
     type: String,
-    required: true,
+    default: '/resume.png',
   },
 
   height: {
@@ -38,6 +38,7 @@ const ApplicantSchema = new mongoose.Schema({
 
   audition: {
     type: String,
+    required: true,
   },
 
   status: {

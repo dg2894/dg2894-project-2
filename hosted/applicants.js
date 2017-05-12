@@ -24,32 +24,62 @@ var renderApplicantList = function renderApplicantList() {
       { key: applicant._id, className: "applicant" },
       React.createElement(
         "div",
-        { className: "applicantInfo" },
+        { className: "applicantInfoContainer" },
+        React.createElement("div", { className: "applicantPhoto",
+          style: { backgroundImage: 'url(' + applicant.photo + ')',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'none' } }),
         React.createElement(
-          "h3",
-          { className: "applicantName" },
-          applicant.name
-        ),
-        React.createElement("img", { className: "applicantPhoto", src: applicant.photo }),
-        React.createElement(
-          "h3",
-          { className: "applicantBirthday" },
-          applicant.birthday
-        ),
-        React.createElement(
-          "h3",
-          { className: "applicantHeight" },
-          applicant.height
-        ),
-        React.createElement(
-          "h3",
-          { className: "applicantDream" },
-          applicant.dream
-        ),
-        React.createElement(
-          "a",
-          { className: "applicantAudition", href: applicant.audition },
-          "View Audition"
+          "div",
+          { className: "applicantInfo" },
+          React.createElement(
+            "h3",
+            { className: "applicantName" },
+            applicant.name
+          ),
+          React.createElement(
+            "h3",
+            { className: "applicantBirthday" },
+            applicant.birthday
+          ),
+          React.createElement(
+            "h3",
+            { className: "applicantHeight" },
+            applicant.height,
+            " cm"
+          ),
+          React.createElement(
+            "div",
+            { className: "dream-audition" },
+            React.createElement(
+              "h3",
+              { className: "applicantDream" },
+              React.createElement(
+                "div",
+                { className: "a-label" },
+                "Dream"
+              ),
+              " ",
+              applicant.dream,
+              " "
+            ),
+            React.createElement(
+              "h3",
+              { className: "applicantAudition" },
+              React.createElement(
+                "div",
+                { className: "a-label" },
+                "Audition"
+              ),
+              " ",
+              React.createElement(
+                "a",
+                { target: "_blank", href: applicant.audition },
+                "View"
+              )
+            )
+          )
         )
       )
     );

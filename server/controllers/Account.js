@@ -50,9 +50,6 @@ const updatePassword = (req, res) => {
   const username = `${req.body.username}`;
   const password = `${req.body.currentPass}`;
 
-  console.dir(username);
-  console.dir(password);
-
   return Account.AccountModel.authenticate(username, password, (err, account) => {
     if (err || !account) {
       return res.status(401).json({ error: 'Wrong username or password' });
@@ -114,7 +111,7 @@ const signup = (request, response) => {
       console.log(err);
 
       if (err.code === 11000) {
-        return res.status(400).json({ error: 'Username already in use.' });
+        return res.status(400).json({ error: 'Username already in use' });
       }
 
       return res.status(400).json({ error: 'An error occured' });

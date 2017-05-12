@@ -7,13 +7,13 @@ const handleApplicant = (e) => {
 
   e.preventDefault();
 
-  if($("#applicantName").val() == '' || $("#applicantBirthday").val() == '' || $("#applicantDream").val() == '' || $("#applicantAudition").val() == '') {
-    handleError("Name, birthday, dream, and aufition fields are required");
-    return false;
-  }
+  // if($("#applicantName").val() == '' || $("#applicantBirthday").val() == '' || $("#applicantDream").val() == '' || $("#applicantAudition").val() == '') {
+  //   handleError("Name, birthday, dream, and aufition fields are required");
+  //   return false;
+  // }
 
   sendAjax('POST', $("#applicantForm").attr("action"), $("#applicantForm").serialize(), function() {
-    handleSuccess("Profile Created");
+    handleSuccess("Application recieved");
   });
 
   return false;
@@ -28,7 +28,6 @@ const renderApplicant = function() {
       method="POST"
       className="idolForm"
     >
-      <h3 className="sectionTitle">Apply Here</h3>
       <input id="applicantName" type="text" name="name" placeholder="Name" required/>
       <input id="applicantBirthday" type="text" name="birthday" placeholder="Birthday" required/>
       <input id="applicantPhoto" type="text" name="photo" placeholder="Profile Photo"/>

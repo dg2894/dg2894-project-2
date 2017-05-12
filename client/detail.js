@@ -25,7 +25,7 @@ const handleEdit = function (e) {
 const handleFavorite = function (e) {
   e.preventDefault();
 
-  let idolFave = document.querySelector('.idolFavorite').checked;
+  let idolFave = document.querySelector('.idolFavorite').value;
 
   const requestUrl = '/favorite/' + idolId + idolFave;
 
@@ -40,13 +40,21 @@ const renderChosenIdol = function() {
   const idolNode = this.state.data.map(function(idol) {
 
     return (
-      <div key={idol._id} className="idolInfo">
-        <h3 className="idolName"><span className="idol-label">Name</span>: {idol.name} </h3>
-        <h3 className="idolBirthday"><span className="idol-label">Birthday</span>: {idol.birthday} </h3>
-        <h3 className="idolStatus"><span className="idol-label">Status</span>: <a href={'/viewBy/' + idol.status}>{idol.status}</a></h3>
-        <h3 className="idolTalent"><span className="idol-label">Talent</span>: {idol.talent} </h3>
-        <h3 className="idolHeight"><span className="idol-label">Height</span>: {idol.height}cm </h3>
-        <h3 className="idolNotes"><span className="idol-label">Notes</span>: {idol.notes} </h3>
+      <div key={idol._id} className="idolInfoDetail">
+        <div className="idolPhoto"
+        style={{backgroundImage: 'url(' + idol.photo + ')',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'none'}}>
+        </div>
+        <h3 className="idolNameDetail">{idol.name}</h3>
+        <h3 className="idolBirthday"><span>Born On</span> {idol.birthday} </h3>
+        <h3 className="idolHeight">{idol.height} cm </h3>
+        <div className="status-talent">
+          <h3 className="idolStatus"><div className="idol-label">Status</div> <a href={'/viewBy/' + idol.status}>{idol.status}</a></h3>
+          <h3 className="idolTalent"><div className="idol-label">Talent</div> {idol.talent} </h3>
+        </div>
+        <h3 className="idolNotes">{idol.notes}</h3>
       </div>
     );
   });
@@ -54,19 +62,23 @@ const renderChosenIdol = function() {
   const favoriteNode = this.state.data.map(function(idol) {
     if (idol.favorite) {
       return (
-        <input key={idol._id} className="idolFavorite" type="checkbox" name="favorite" defaultChecked="checked"/>
+        <button key={idol._id} type="submit" className="idolFavorite" name="favorite" value="false">
+          <img className="fave" src="/favorite.png" title="Unfavorite"/>
+        </button>
       );
     } else {
       return (
-        <input key={idol._id} className="idolFavorite" type="checkbox" name="favorite"/>
+        <button key={idol._id} type="submit" className="idolFavorite" name="favorite" value="true">
+          <img className="fave" src="/unfavorite.png" title="Favorite" />
+        </button>
       );
     }
   });
 
   return (
-    <div className="chosenIdol">
+    <div id="favoriteForm">
       <form id="chosenIdolFavorite"
-        onChange={this.handleFavorite}
+        onSubmit={this.handleFavorite}
         name="chosenIdolFavorite"
         method="POST"
       >

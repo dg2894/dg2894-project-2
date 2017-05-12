@@ -42,6 +42,7 @@ const IdolSchema = new mongoose.Schema({
 
   notes: {
     type: String,
+    default: 'None',
   },
 
   favorite: {

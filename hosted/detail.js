@@ -26,7 +26,7 @@ var handleEdit = function handleEdit(e) {
 var handleFavorite = function handleFavorite(e) {
   e.preventDefault();
 
-  var idolFave = document.querySelector('.idolFavorite').checked;
+  var idolFave = document.querySelector('.idolFavorite').value;
 
   var requestUrl = '/favorite/' + idolId + idolFave;
 
@@ -42,100 +42,97 @@ var renderChosenIdol = function renderChosenIdol() {
 
     return React.createElement(
       "div",
-      { key: idol._id, className: "idolInfo" },
+      { key: idol._id, className: "idolInfoDetail" },
+      React.createElement("div", { className: "idolPhoto",
+        style: { backgroundImage: 'url(' + idol.photo + ')',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'none' } }),
       React.createElement(
         "h3",
-        { className: "idolName" },
-        React.createElement(
-          "span",
-          { className: "idol-label" },
-          "Name"
-        ),
-        ": ",
-        idol.name,
-        " "
+        { className: "idolNameDetail" },
+        idol.name
       ),
       React.createElement(
         "h3",
         { className: "idolBirthday" },
         React.createElement(
           "span",
-          { className: "idol-label" },
-          "Birthday"
+          null,
+          "Born On"
         ),
-        ": ",
+        " ",
         idol.birthday,
         " "
       ),
       React.createElement(
         "h3",
-        { className: "idolStatus" },
+        { className: "idolHeight" },
+        idol.height,
+        " cm "
+      ),
+      React.createElement(
+        "div",
+        { className: "status-talent" },
         React.createElement(
-          "span",
-          { className: "idol-label" },
-          "Status"
+          "h3",
+          { className: "idolStatus" },
+          React.createElement(
+            "div",
+            { className: "idol-label" },
+            "Status"
+          ),
+          " ",
+          React.createElement(
+            "a",
+            { href: '/viewBy/' + idol.status },
+            idol.status
+          )
         ),
-        ": ",
         React.createElement(
-          "a",
-          { href: '/viewBy/' + idol.status },
-          idol.status
+          "h3",
+          { className: "idolTalent" },
+          React.createElement(
+            "div",
+            { className: "idol-label" },
+            "Talent"
+          ),
+          " ",
+          idol.talent,
+          " "
         )
       ),
       React.createElement(
         "h3",
-        { className: "idolTalent" },
-        React.createElement(
-          "span",
-          { className: "idol-label" },
-          "Talent"
-        ),
-        ": ",
-        idol.talent,
-        " "
-      ),
-      React.createElement(
-        "h3",
-        { className: "idolHeight" },
-        React.createElement(
-          "span",
-          { className: "idol-label" },
-          "Height"
-        ),
-        ": ",
-        idol.height,
-        "cm "
-      ),
-      React.createElement(
-        "h3",
         { className: "idolNotes" },
-        React.createElement(
-          "span",
-          { className: "idol-label" },
-          "Notes"
-        ),
-        ": ",
-        idol.notes,
-        " "
+        idol.notes
       )
     );
   });
 
   var favoriteNode = this.state.data.map(function (idol) {
     if (idol.favorite) {
-      return React.createElement("input", { key: idol._id, className: "idolFavorite", type: "checkbox", name: "favorite", defaultChecked: "checked" });
+      return React.createElement(
+        "button",
+        { key: idol._id, type: "submit", className: "idolFavorite", name: "favorite", value: "false" },
+        React.createElement("img", { className: "fave", src: "/favorite.png", title: "Unfavorite" })
+      );
     } else {
-      return React.createElement("input", { key: idol._id, className: "idolFavorite", type: "checkbox", name: "favorite" });
+      return React.createElement(
+        "button",
+        { key: idol._id, type: "submit", className: "idolFavorite", name: "favorite", value: "true" },
+        React.createElement("img", { className: "fave", src: "/unfavorite.png", title: "Favorite" })
+      );
     }
   });
 
   return React.createElement(
     "div",
-    { className: "chosenIdol" },
+    { id: "favoriteForm" },
     React.createElement(
       "form",
       { id: "chosenIdolFavorite",
-        onChange: this.handleFavorite,
+        onSubmit: this.handleFavorite,
         name: "chosenIdolFavorite",
         method: "POST"
       },

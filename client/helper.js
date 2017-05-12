@@ -1,9 +1,13 @@
 const handleError = (message) => {
-  $("#errorMessage").text(message);
+  $('#errorMessage').remove();
+  $('.message-body').append("<span id='errorMessage'></span>");
+  $('#errorMessage').text(message);
 };
 
 const handleSuccess = (message) => {
-  $("#successMessage").text(message);
+  $('#successMessage').remove();
+  $('.message-body').append("<span id='successMessage'></span>");
+  $('#successMessage').text(message);
 };
 
 const redirect = (response) => {
@@ -49,10 +53,12 @@ const renderIdolList = function() {
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'none'}}>
-        <div className="idolInfo">
-          <h3 className="idolName">{idol.name}</h3>
-          <h3 className="idolStatus"><a href={'/viewBy/' + idol.status}>{idol.status}</a></h3>
-          <a href={'/view/' + idol._id}>View Profile</a>
+        <div className="idolInfoContainer">
+          <div className="idolInfo">
+            <h3 className="idolName">{idol.name}</h3>
+            <h3 className="idolStatusHome"><a href={'/viewBy/' + idol.status}>{idol.status}</a></h3>
+              <a href={'/view/' + idol._id}><div className="viewIdolLink">View Profile</div></a>
+          </div>
         </div>
       </div>
     );

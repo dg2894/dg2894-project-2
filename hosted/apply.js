@@ -9,13 +9,13 @@ var handleApplicant = function handleApplicant(e) {
 
   e.preventDefault();
 
-  if ($("#applicantName").val() == '' || $("#applicantBirthday").val() == '' || $("#applicantDream").val() == '' || $("#applicantAudition").val() == '') {
-    handleError("Name, birthday, dream, and aufition fields are required");
-    return false;
-  }
+  // if($("#applicantName").val() == '' || $("#applicantBirthday").val() == '' || $("#applicantDream").val() == '' || $("#applicantAudition").val() == '') {
+  //   handleError("Name, birthday, dream, and aufition fields are required");
+  //   return false;
+  // }
 
   sendAjax('POST', $("#applicantForm").attr("action"), $("#applicantForm").serialize(), function () {
-    return true;
+    handleSuccess("Application recieved");
   });
 
   return false;
@@ -31,11 +31,6 @@ var renderApplicant = function renderApplicant() {
       method: "POST",
       className: "idolForm"
     },
-    React.createElement(
-      "h3",
-      { className: "sectionTitle" },
-      "Apply Here"
-    ),
     React.createElement("input", { id: "applicantName", type: "text", name: "name", placeholder: "Name", required: true }),
     React.createElement("input", { id: "applicantBirthday", type: "text", name: "birthday", placeholder: "Birthday", required: true }),
     React.createElement("input", { id: "applicantPhoto", type: "text", name: "photo", placeholder: "Profile Photo" }),

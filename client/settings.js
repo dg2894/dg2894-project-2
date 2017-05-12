@@ -4,19 +4,17 @@ let formRenderer;
 const handleEdit = function (e) {
   e.preventDefault();
 
-  if ($("#accountName").val() == '' || $("#currentPass").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == '') {
-    console.log("All fields are required")
-    return false;
-  }
+  // if ($("#accountName").val() == '' || $("#currentPass").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == '') {
+  //   return false;
+  // }
 
   if ($("#newPass").val() !== $("#newPass2").val()) {
-    return false;
+    handleError("Passwords do not match")
+  } else {
+    sendAjax('POST', $("#accountForm").attr("action"), $("#accountForm").serialize(), function() {
+      handleSuccess("Password has been changed");
+    });
   }
-
-  sendAjax('POST', $("#accountForm").attr("action"), $("#accountForm").serialize(), function() {
-    handleError("");
-    handleSuccess("Password has been changed");
-  });
 
   return false;
 };

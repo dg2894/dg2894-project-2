@@ -15,13 +15,22 @@ const renderApplicantList = function() {
   const applicantNodes = this.state.data.map(function(applicant) {
     return (
       <div key={applicant._id} className="applicant">
-        <div className="applicantInfo">
-          <h3 className="applicantName">{applicant.name}</h3>
-          <img className="applicantPhoto" src={applicant.photo}/>
-          <h3 className="applicantBirthday">{applicant.birthday}</h3>
-          <h3 className="applicantHeight">{applicant.height}</h3>
-          <h3 className="applicantDream">{applicant.dream}</h3>
-          <a className="applicantAudition" href={applicant.audition}>View Audition</a>
+        <div className="applicantInfoContainer">
+         <div className="applicantPhoto"
+          style={{backgroundImage: 'url(' + applicant.photo + ')',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'none'}}>
+          </div>
+          <div className="applicantInfo">
+            <h3 className="applicantName">{applicant.name}</h3>
+            <h3 className="applicantBirthday">{applicant.birthday}</h3>
+            <h3 className="applicantHeight">{applicant.height} cm</h3>
+            <div className="dream-audition">
+            <h3 className="applicantDream"><div className="a-label">Dream</div> {applicant.dream} </h3>
+            <h3 className="applicantAudition"><div className="a-label">Audition</div> <a target="_blank" href={applicant.audition}>View</a></h3>
+            </div>
+          </div>
         </div>
       </div>
     );
