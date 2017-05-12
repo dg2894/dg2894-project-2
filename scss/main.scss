@@ -130,6 +130,7 @@ input[type="submit"] {
 .idolList {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .idol:first-of-type {

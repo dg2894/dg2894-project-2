@@ -53,7 +53,6 @@ const makeApplicant = (req, res) => {
 };
 
 const getApplicants = (request, response) => {
-  const req = request;
   const res = response;
 
   return Applicant.ApplicantModel.getAll('applicant', (err, docs) => {
