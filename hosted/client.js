@@ -63,6 +63,15 @@ var renderSignup = function renderSignup() {
     React.createElement('input', { id: 'user', type: 'text', name: 'username', placeholder: 'Username', required: true }),
     React.createElement('input', { id: 'pass', type: 'password', name: 'pass', placeholder: 'Password', required: true }),
     React.createElement('input', { id: 'pass2', type: 'password', name: 'pass2', placeholder: 'Retype Password', required: true }),
+    React.createElement(
+      'h3',
+      { className: 'fake-payment' },
+      'Payment Information'
+    ),
+    React.createElement('input', { id: 'fake-name', type: 'String', name: 'credit-card-name', value: 'Cody Van De Mark', disabled: true }),
+    React.createElement('input', { id: 'fake-credit-card', type: 'number', name: 'credit-card', value: '1234567889012345', disabled: true }),
+    React.createElement('input', { id: 'fake-cvc', type: 'number', name: 'credit-card-cvc', value: '001', disabled: true }),
+    React.createElement('input', { id: 'fake-address', type: 'string', name: 'credit-card-address', value: '4 Lomb Drive, Rochester, NY, 14623', disabled: true }),
     React.createElement('input', { type: 'hidden', name: '_csrf', value: this.props.csrf }),
     React.createElement('input', { id: 'loginButton', className: 'formSubmit', type: 'submit', value: 'Sign up' })
   );

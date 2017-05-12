@@ -60,6 +60,11 @@ const renderSignup = function() {
       <input id="user" type="text" name="username" placeholder="Username" required/>
       <input id="pass" type="password" name="pass" placeholder="Password" required/>
       <input id="pass2" type="password" name="pass2" placeholder="Retype Password" required/>
+      <h3 className="fake-payment">Payment Information</h3>
+      <input id="fake-name" type="String" name="credit-card-name" value="Cody Van De Mark" disabled/>
+      <input id="fake-credit-card" type="number" name="credit-card" value="1234567889012345" disabled/>
+      <input id="fake-cvc" type="number" name="credit-card-cvc" value="001" disabled/>
+      <input id="fake-address" type="string" name="credit-card-address" value="4 Lomb Drive, Rochester, NY, 14623" disabled/>
       <input type="hidden" name="_csrf" value={this.props.csrf} />
       <input id="loginButton" className="formSubmit" type="submit" value="Sign up" />
     </form>
